@@ -1,0 +1,57 @@
+# Local scientific inputs, numerical results and manuscript projects
+/Data/*
+!/Data/README.md
+**/results/
+/Luc_i_a/
+/Luc_i_a_JRSSC/
+
+# Local maintenance reports and editorial working documents
+/docs/editorial/
+/docs/cleanup_*.csv
+/docs/dependency_audit_*.json
+/docs/frozen_inputs_before_cleanup.csv
+/docs/layout_moves_*.csv
+
+# Generated scientific objects and graphics, wherever exported
+*.rds
+*.RDS
+*.rda
+*.RData
+*.parquet
+*.zip
+*.pdf
+*.png
+*.jpg
+*.jpeg
+*.tif
+*.tiff
+*.svg
+*.eps
+*.gif
+*.webp
+
+# Runtime and compilation artifacts
+__pycache__/
+.cache/
+tmp/
+sourcecpp_cache/
+worker_status/
+worker_status.json
+progress.txt
+worker_console.log
+*.o
+*.dll
+*.so
+*.pyc
+.Rhistory
+.Rproj.user/
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.synctex.gz
+*.toc
+*.xdv
