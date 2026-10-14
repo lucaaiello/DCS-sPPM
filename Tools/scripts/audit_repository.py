@@ -22,6 +22,7 @@ def main():
             if (PROJECT / before).exists():
                 errors.append(f"Obsolete duplicate {category} path: {before}")
     documents = [PROJECT / "README.md", PROJECT / "Data/README.md"]
+    documents.extend((PROJECT / "Data/preparation").rglob("*.md"))
     documents.extend((PROJECT / "docs").glob("*.md"))
     for document in documents:
         source = document.read_text(encoding="utf-8-sig")
@@ -61,6 +62,7 @@ def main():
                     errors.append(f"Missing bibliography: {relative}: {bibliography}")
 
     code_directories = [PROJECT / "R", PROJECT / "src"]
+    code_directories.extend([PROJECT / "Data/preparation", PROJECT / "Data/preparation/manifests"])
     code_directories.extend(PROJECT.glob("*/scripts"))
     code_directories.extend(PROJECT.glob("*/*/scripts"))
     code_files = [path for directory in code_directories
@@ -98,7 +100,7 @@ def main():
         "retained_code_files": len(code_files), "missing_local_inputs": missing_inputs,
         "missing_local_manuscripts": missing_manuscripts,
         "errors": sorted(set(errors)),
-        "external_data": "Preparation also needs parent Data/eea_pm10 metadata and caches; see Data/README.md.",
+        "external_data": "Raw EEA/ERA5 downloads are external; the frozen-cohort route uses Data/preparation manifests without parent caches or historical fits. Historical selection audits need parent caches.",
         "scientific_validation": "Not performed: paths are checked, not numerical results or convergence.",
     }, indent=2))
     raise SystemExit(1 if errors else 0)

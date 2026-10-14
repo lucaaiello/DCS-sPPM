@@ -1,6 +1,6 @@
 # DCS-sPPM: European PM10 and simulation reproducibility
 
-This is the reproduction-code project for a Bayesian decomposition of shared spatial variation and heterogeneous local temporal dynamics. Git contains source code and reproduction documentation only. Scientific inputs, results, figures and both manuscript projects remain available locally but are excluded from Git. Cleanup does not change the statistical model or fitted results.
+This is the reproduction-code project for a Bayesian decomposition of shared spatial variation and heterogeneous local temporal dynamics. Git contains source code, documentation and text/CSV input manifests, not raw observations, fitted results or manuscripts. The [download-to-analysis workflow](Data/preparation/README.md) rebuilds the final application inputs from PM10 and ERA5 downloads and checks them against the frozen manuscript sample before use.
 
 ## Start here
 
@@ -14,7 +14,7 @@ This is the reproduction-code project for a Bayesian decomposition of shared spa
 | `Real_data_analysis/` | Preparation, model comparison, maps, mixing diagnostics and reference inputs |
 | `Manuscript_figures/` | Shared schematic/comparative/composition scripts and supporting assets |
 | `Tools/` | Read-only path and source-syntax audits |
-| `Data/` | Local frozen inputs; see `Data/README.md` before sharing |
+| `Data/` | Local inputs; `Data/preparation/` contains versioned download/preparation code and manuscript manifests |
 | `docs/` | Reproduction instructions, dependencies, manuscript-to-code map and layout migration; local audit reports/editorial notes are ignored |
 
 See [the manuscript map](docs/MANUSCRIPT_MAP.md), [reproduction instructions](docs/REPRODUCIBILITY.md) and [dependencies](docs/DEPENDENCIES.md). The [layout migration map](docs/layout_migration_2026-10-13.json) records former numbered script names and result locations. Script prefixes were removed; meaningful years, iteration counts and replication counts in scientific identifiers were preserved.
@@ -39,7 +39,7 @@ Simulation sources are `Simulations/clustering_recovery/results/clustering_recov
 - `src/predictive_regime_postprocess.cpp`: cached-partition predictive summaries.
 - `src/benchmark_gp_nngp.cpp`: isolated spatial computation.
 
-The two other real-data kernels and `Real_data_analysis/mixing_diagnostics/scripts/benchmark_mixing.R` remain because SERRA still discusses their mixing diagnostics. They are not production alternatives. Preparation now reads compact frozen metadata from `Data/*_preparation.rds`, not historical posterior fits. The historical diagnostic warm start contains only one set of starting values; final unique-location analyses still start from the same fixed values as before.
+The other real-data kernels and `Real_data_analysis/mixing_diagnostics/scripts/benchmark_mixing.R` remain as historical diagnostic code, not production alternatives. Final analyses start from fixed values and do not require historical posterior fits. A fresh clone recreates the compact preparation metadata from versioned station/grid/scaling manifests; the historical diagnostic warm start is optional.
 
 ## Safe first check
 
@@ -53,7 +53,9 @@ The audit reads paths and file metadata only. It does not fit models, recompute 
 
 ## GitHub and data release
 
-Only reproduction code, configuration/path helpers and useful reproduction documentation are versioned. Every experiment's `results/` directory is ignored, including compact CSV summaries and run metadata. Both LaTeX projects, input data, exported graphics, compiled objects, caches and local maintenance/editorial reports are also ignored; none is deleted from disk. Scientific inputs can be distributed as GitHub Release assets, separately from the code history, once redistribution permissions and source attribution have been checked. A clone requires those inputs to refit, and saved current results to regenerate graphics without refitting. See `Data/README.md` for the input inventory. Figure composition and manuscript compilation additionally require the separately supplied manuscript projects and source assets. No input release has been uploaded yet.
+Code, preparation notebooks/scripts, input manifests and useful documentation are versioned. All results, raw downloads, generated RDS inputs, graphics, caches and both LaTeX projects remain ignored. Obtain PM10 and ERA5 from their original providers and follow [the preparation instructions](Data/preparation/README.md). The final-cohort reconstruction does not require a separate historical-results repository. Saved results are needed only to regenerate figures without refitting. Manuscript projects and source images are local author-only resources.
+
+The supplied preparation differs from current manuscript wording on daily/hourly precedence, verification/hour-count filtering and meteorological definitions. Portable entry points preserve the supplied source rules and require agreement with frozen numeric fingerprints instead of silently imposing different scientific choices. Raw-download regeneration must pass that check before the workflow is described as independently validated. No fitting is needed for this check.
 
 This cleanup does not publish, push, commit or license the project. Data redistribution terms and the authors' choice of code license must be checked before release. Manuscript availability placeholders require author action.
 

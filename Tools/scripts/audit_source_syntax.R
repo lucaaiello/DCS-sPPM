@@ -7,7 +7,7 @@ while (!file.exists(file.path(project, "R", "project_paths.R"))) {
   if (identical(parent, project)) stop("Could not locate the manuscript project.")
   project <- parent
 }
-source_roots <- c("R", "Simulations", "Real_data_analysis", "Manuscript_figures", "Tools")
+source_roots <- c("R", "Simulations", "Real_data_analysis", "Manuscript_figures", "Tools", "Data/preparation")
 files <- unlist(lapply(source_roots, function(directory) {
   list.files(file.path(project, directory), pattern = "[.]R$", recursive = TRUE, full.names = TRUE)
 }), use.names = FALSE)

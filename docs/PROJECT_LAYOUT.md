@@ -15,6 +15,7 @@ Real_data_analysis/
   reference_inputs/results/
 Manuscript_figures/{scripts,results}/
 Tools/scripts/
+Data/preparation/{scripts,manifests}/
 ```
 
 Real-data map outputs remain beside their generating final fits, under each
@@ -27,7 +28,10 @@ Git retains scripts, shared helpers, C++ sources and reproduction documentation.
 The diagram above describes the complete local installation: all `results/`
 directories, scientific inputs, exported graphics, both LaTeX folders and local
 maintenance/editorial reports are ignored, not deleted. A code-only clone must
-restore the separately supplied inputs before running analyses.
+obtain raw inputs and follow Data/preparation/README.md before running analyses.
+Preparation code and station/grid/scaling manifests are versioned; raw
+downloads and generated input arrays are not. The final-cohort builder is
+independent of the parent repository and historical posterior fits.
 
 Ordinal script prefixes were removed. Result names containing iteration counts,
 replication counts and years are scientific configuration identifiers and were

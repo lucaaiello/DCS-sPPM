@@ -1,5 +1,12 @@
 # Frozen inputs and access
 
+Start with [download-to-analysis preparation](preparation/README.md). Preparation
+code and text/CSV manifests are versioned; raw observations, weather arrays and
+generated RDS files are not. The frozen-cohort builder recreates the three
+production inputs without historical fits or parent-repository caches, checking
+numeric agreement before writing outputs. Source-download regeneration still
+needs to pass those checks; having scripts alone does not establish validation.
+
 The following local objects are intentionally excluded from ordinary Git:
 
 - `pm10_combined_2024.rds`: daily observations before unique-location selection.
@@ -42,6 +49,8 @@ supplied by Git. Do not rerun selection merely to regenerate figures.
 
 A portable data release must supply frozen inputs and required source metadata
 through an appropriate archive, subject to source redistribution terms, with
-access dates, product names, selection overrides and checksums. The code does
-not automatically recreate those inputs. No data-release URL is assumed here.
+access dates, product names, selection overrides and checksums. The older
+selection/audit route does not automatically recreate those inputs. The new
+portable preparation route uses frozen station decisions and fingerprints to
+rebuild the production inputs. No data-release URL is assumed here.
 The final sample is the unique-location object, not an earlier inventory.

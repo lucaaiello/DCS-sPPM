@@ -7,6 +7,12 @@ these examples deliberately identify the final result names.
 
 ## 1. Read-only audit
 
+For a fresh clone, first follow [raw-data retrieval and preparation](../Data/preparation/README.md).
+It rebuilds the final inputs using versioned station/grid/scaling manifests,
+without reading posterior fits. The builder stops on fingerprint disagreement
+rather than replacing the analysed sample. Historical diagnostic inputs are
+optional and are not required for the final four-model fits.
+
 ```powershell
 python Tools/scripts/audit_repository.py
 Rscript Tools/scripts/audit_source_syntax.R
@@ -54,10 +60,26 @@ recomputation. Never use it as a substitute for validating a new fit.
 SERRA/source panels remain in `Luc_i_a/fig`; composed JRSS-C panels are in
 `Luc_i_a_JRSSC/fig`. Letter overlays remain in LaTeX.
 
+To export separate submission figures with the same LaTeX panel letters:
+
+```powershell
+python Manuscript_figures/scripts/export_jrssc_figures.py --pdflatex "C:/texlive/2025/bin/windows/pdflatex.exe"
+```
+
+This author-only packaging step reads the current main/supplement figure blocks
+and existing images, not fitted models. It writes standalone, caption-free PDFs
+and a numbering manifest to `Luc_i_a_JRSSC/fig_exported/`; TeX sources and logs
+remain in its `_build/` subfolder. Original figures and manuscript sources are
+not changed. The 157 mm width and 9 bp sans-serif labels match the current
+modern/medium OUP setup; change `--width-mm` if manuscript dimensions change.
+Top padding prevents the conceptual figure's above-image labels being clipped.
+`--dry-run` validates extraction without compiling or writing output.
+
 ## 4. Refit the four real-data specifications (expensive)
 
-Only launch deliberately after scientific inputs and frozen preparation metadata have been
-restored. This runs the matched analyses, not a lightweight repository check.
+Only launch deliberately after source inputs pass manuscript-manifest validation
+and are installed under Data/. This runs the matched analyses, not a lightweight
+repository check.
 
 ```powershell
 $env:DCS_RSCRIPT = "C:/Program Files/R/R-4.4.1/bin/Rscript.exe"
