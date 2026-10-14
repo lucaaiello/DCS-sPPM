@@ -12,17 +12,19 @@ def main():
     parser = argparse.ArgumentParser(description="Read-only manuscript dependency audit")
     parser.add_argument("--require-results", action="store_true")
     parser.add_argument("--require-manuscripts", action="store_true")
+    parser.add_argument("--require-inputs", action="store_true")
     arguments = parser.parse_args()
     errors = []
     migration = json.loads((PROJECT / "docs/layout_migration_2026-10-13.json").read_text(encoding="utf-8"))
     for category in ("scripts", "results"):
         for before, after in migration[category].items():
+            if after in migration.get("archived_scripts", []):
+                continue
             if not (PROJECT / after).exists() and (category == "scripts" or arguments.require_results):
                 errors.append(f"Missing migrated {category} path: {after}")
             if (PROJECT / before).exists():
                 errors.append(f"Obsolete duplicate {category} path: {before}")
     documents = [PROJECT / "README.md", PROJECT / "Data/README.md"]
-    documents.extend((PROJECT / "Data/preparation").rglob("*.md"))
     documents.extend((PROJECT / "docs").glob("*.md"))
     for document in documents:
         source = document.read_text(encoding="utf-8-sig")
@@ -62,7 +64,6 @@ def main():
                     errors.append(f"Missing bibliography: {relative}: {bibliography}")
 
     code_directories = [PROJECT / "R", PROJECT / "src"]
-    code_directories.extend([PROJECT / "Data/preparation", PROJECT / "Data/preparation/manifests"])
     code_directories.extend(PROJECT.glob("*/scripts"))
     code_directories.extend(PROJECT.glob("*/*/scripts"))
     code_files = [path for directory in code_directories
@@ -80,8 +81,10 @@ def main():
 
     result_root = PROJECT / "Real_data_analysis/model_comparison/results/production_30000_unique_locations"
     inputs = [PROJECT / "Data" / name for name in (
-        "pm10_combined_2024.rds", "era5_combined_2024.rds", "pm10_unique_locations_2024.rds",
-        "production_30000_online_grid_preparation.rds", "production_10000_single_chain_preparation.rds")]
+        "era5_combined_2024.rds", "pm10_unique_locations_2024.rds",
+        "production_30000_online_grid_preparation.rds")]
+    if arguments.require_inputs:
+        errors.extend(f"Missing release input: {path.relative_to(PROJECT)}" for path in inputs if not path.exists())
     inputs.extend(result_root / model / "pilot_fit.rds" for model in (
         "dcs_sppm", "ppm_common_shock", "k1_common_shock", "sppm_no_common_shock"))
     inputs.extend([
@@ -100,7 +103,7 @@ def main():
         "retained_code_files": len(code_files), "missing_local_inputs": missing_inputs,
         "missing_local_manuscripts": missing_manuscripts,
         "errors": sorted(set(errors)),
-        "external_data": "Raw EEA/ERA5 downloads are external; the frozen-cohort route uses Data/preparation manifests without parent caches or historical fits. Historical selection audits need parent caches.",
+        "external_data": "Production starts from three frozen release inputs under Data/. Raw preparation and parent caches are not production dependencies.",
         "scientific_validation": "Not performed: paths are checked, not numerical results or convergence.",
     }, indent=2))
     raise SystemExit(1 if errors else 0)

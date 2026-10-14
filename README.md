@@ -1,6 +1,6 @@
 # DCS-sPPM: European PM10 and simulation reproducibility
 
-This is the reproduction-code project for a Bayesian decomposition of shared spatial variation and heterogeneous local temporal dynamics. Git contains source code, documentation and text/CSV input manifests, not raw observations, fitted results or manuscripts. The [download-to-analysis workflow](Data/preparation/README.md) rebuilds the final application inputs from PM10 and ERA5 downloads and checks them against the frozen manuscript sample before use.
+This repository reproduces simulations and a European PM10 analysis for a Bayesian decomposition of shared spatial variation and heterogeneous local temporal dynamics. The real-data workflow starts from the exact prepared inputs used in the manuscript, distributed as assets of a versioned release of this same repository. It does not claim to reproduce preprocessing from fresh raw downloads. Git contains analysis/simulation/plotting code and documentation, not data arrays, fitted results or manuscripts. See [input installation](Data/README.md) and [release packaging](docs/DATA_RELEASE.md).
 
 ## Start here
 
@@ -11,10 +11,10 @@ This is the reproduction-code project for a Bayesian decomposition of shared spa
 | `src/` | Production/prediction C++ kernels, spatial benchmark and regime post-processing |
 | `R/` | Shared preparation, simulation, sampling, summary and plotting helpers |
 | `Simulations/` | Experiment folders, each with its own `scripts/` and `results/` |
-| `Real_data_analysis/` | Preparation, model comparison, maps, mixing diagnostics and reference inputs |
+| `Real_data_analysis/` | Model comparison and maps; historical diagnostic outputs remain local |
 | `Manuscript_figures/` | Shared schematic/comparative/composition scripts and supporting assets |
 | `Tools/` | Read-only path and source-syntax audits |
-| `Data/` | Local inputs; `Data/preparation/` contains versioned download/preparation code and manuscript manifests |
+| `Data/` | Frozen inputs downloaded from the matching release; only README is versioned |
 | `docs/` | Reproduction instructions, dependencies, manuscript-to-code map and layout migration; local audit reports/editorial notes are ignored |
 
 See [the manuscript map](docs/MANUSCRIPT_MAP.md), [reproduction instructions](docs/REPRODUCIBILITY.md) and [dependencies](docs/DEPENDENCIES.md). The [layout migration map](docs/layout_migration_2026-10-13.json) records former numbered script names and result locations. Script prefixes were removed; meaningful years, iteration counts and replication counts in scientific identifiers were preserved.
@@ -39,7 +39,7 @@ Simulation sources are `Simulations/clustering_recovery/results/clustering_recov
 - `src/predictive_regime_postprocess.cpp`: cached-partition predictive summaries.
 - `src/benchmark_gp_nngp.cpp`: isolated spatial computation.
 
-The other real-data kernels and `Real_data_analysis/mixing_diagnostics/scripts/benchmark_mixing.R` remain as historical diagnostic code, not production alternatives. Final analyses start from fixed values and do not require historical posterior fits. A fresh clone recreates the compact preparation metadata from versioned station/grid/scaling manifests; the historical diagnostic warm start is optional.
+The other real-data kernels and `Real_data_analysis/mixing_diagnostics/scripts/benchmark_mixing.R` remain as historical diagnostic code, not production alternatives. Final analyses start from fixed values and do not require historical posterior fits. Download the compact preparation metadata from the matching input release; the historical diagnostic warm start is optional and not needed for production.
 
 ## Safe first check
 
@@ -53,9 +53,9 @@ The audit reads paths and file metadata only. It does not fit models, recompute 
 
 ## GitHub and data release
 
-Code, preparation notebooks/scripts, input manifests and useful documentation are versioned. All results, raw downloads, generated RDS inputs, graphics, caches and both LaTeX projects remain ignored. Obtain PM10 and ERA5 from their original providers and follow [the preparation instructions](Data/preparation/README.md). The final-cohort reconstruction does not require a separate historical-results repository. Saved results are needed only to regenerate figures without refitting. Manuscript projects and source images are local author-only resources.
+Analysis, simulation and plotting code, shared helpers, validation tools and useful documentation are versioned. All data arrays, results, graphics, caches and both LaTeX projects remain ignored. The three required input files are released separately from Git history through this repository's Releases page. They reproduce the final cohort, imputation, weather matching, scaling and prediction grid without needing unavailable original downloads or historical fits. Saved fitted results are needed only to regenerate figures without refitting. Manuscript projects are local author-only resources.
 
-The supplied preparation differs from current manuscript wording on daily/hourly precedence, verification/hour-count filtering and meteorological definitions. Portable entry points preserve the supplied source rules and require agreement with frozen numeric fingerprints instead of silently imposing different scientific choices. Raw-download regeneration must pass that check before the workflow is described as independently validated. No fitting is needed for this check.
+Raw preparation notebooks/scripts and station-selection utilities have been archived locally rather than deleted. Their provenance remains relevant to the manuscript, but the public reproduction route starts from frozen prepared inputs. This does not exempt the authors from accurately documenting the original filtering and aggregation rules. There is no independently verified fresh-download-to-analysis claim, and no release has been uploaded by these scripts.
 
 This cleanup does not publish, push, commit or license the project. Data redistribution terms and the authors' choice of code license must be checked before release. Manuscript availability placeholders require author action.
 

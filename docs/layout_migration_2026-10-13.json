@@ -46,5 +46,10 @@
     "results/manuscript_assets": "Manuscript_figures/results"
   },
   "preserve_scientific_names": "Year, iteration-count and replication-count identifiers in data/results are retained; only ordinal script prefixes are removed.",
-  "preserve_binary_provenance": "RDS contents are not rewritten. Historical strings inside frozen objects remain provenance; active readers use the new experiment locations."
+  "preserve_binary_provenance": "RDS contents are not rewritten. Historical strings inside frozen objects remain provenance; active readers use the new experiment locations.",
+  "archived_scripts": [
+    "Real_data_analysis/preparation/scripts/prepare_unique_location_pm10.R",
+    "Real_data_analysis/preparation/scripts/audit_unique_location_selection.R",
+    "Real_data_analysis/preparation/scripts/resolve_unique_location_exceptions.R"
+  ]
 }

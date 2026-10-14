@@ -7,11 +7,11 @@ these examples deliberately identify the final result names.
 
 ## 1. Read-only audit
 
-For a fresh clone, first follow [raw-data retrieval and preparation](../Data/preparation/README.md).
-It rebuilds the final inputs using versioned station/grid/scaling manifests,
-without reading posterior fits. The builder stops on fingerprint disagreement
-rather than replacing the analysed sample. Historical diagnostic inputs are
-optional and are not required for the final four-model fits.
+For a fresh clone, first download the three frozen input assets and SHA256SUMS
+from the matching release of this repository. Follow [input installation](../Data/README.md)
+and verify checksums before refitting. The release link must identify the input
+version matching the code, not a moving latest download. Raw preprocessing is
+not part of this reproduction route. Historical diagnostic inputs are optional.
 
 ```powershell
 python Tools/scripts/audit_repository.py
@@ -20,9 +20,11 @@ Rscript Tools/scripts/audit_source_syntax.R
 
 This checks file connections, not scientific correctness. A fresh clone will
 report missing local inputs and manuscripts without failing the code-only audit.
-After separately supplied RDS objects, checkpoints and manuscript projects have
-been restored, use `--require-results --require-manuscripts` for a strict local
-check. Results, figures, data and both LaTeX folders are excluded from Git.
+After installing the release assets, use `--require-inputs` and run
+`Rscript Tools/scripts/validate_preparation_inputs.R` to check the final
+data/design/grid without fitting. `--require-results --require-manuscripts`
+additionally requires saved results and local manuscripts. Results, figures,
+data and both LaTeX folders are excluded from Git.
 
 ## 2. Recreate numerical summaries from checkpoints
 
@@ -77,9 +79,9 @@ Top padding prevents the conceptual figure's above-image labels being clipped.
 
 ## 4. Refit the four real-data specifications (expensive)
 
-Only launch deliberately after source inputs pass manuscript-manifest validation
-and are installed under Data/. This runs the matched analyses, not a lightweight
-repository check.
+Only launch deliberately after the frozen release assets pass checksum and
+input validation and are installed under Data/. This runs the matched analyses,
+not a lightweight repository check.
 
 ```powershell
 $env:DCS_RSCRIPT = "C:/Program Files/R/R-4.4.1/bin/Rscript.exe"

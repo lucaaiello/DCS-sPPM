@@ -8,14 +8,14 @@ Simulations/
   gp_nngp_benchmark/{scripts,results}/
   validation/{scripts,results}/
 Real_data_analysis/
-  preparation/{scripts,results}/
+  preparation/results/  (local historical provenance only)
   model_comparison/{scripts,results}/
   maps/scripts/
   mixing_diagnostics/{scripts,results}/
   reference_inputs/results/
 Manuscript_figures/{scripts,results}/
 Tools/scripts/
-Data/preparation/{scripts,manifests}/
+Data/README.md  (input arrays installed locally from release assets)
 ```
 
 Real-data map outputs remain beside their generating final fits, under each
@@ -28,10 +28,10 @@ Git retains scripts, shared helpers, C++ sources and reproduction documentation.
 The diagram above describes the complete local installation: all `results/`
 directories, scientific inputs, exported graphics, both LaTeX folders and local
 maintenance/editorial reports are ignored, not deleted. A code-only clone must
-obtain raw inputs and follow Data/preparation/README.md before running analyses.
-Preparation code and station/grid/scaling manifests are versioned; raw
-downloads and generated input arrays are not. The final-cohort builder is
-independent of the parent repository and historical posterior fits.
+download the frozen input release and follow Data/README.md before running
+analyses. Raw preprocessing and station-selection tools are archived locally,
+not required by reproduction. Production uses the released prepared inputs
+and is independent of parent-repository caches or historical posterior fits.
 
 Ordinal script prefixes were removed. Result names containing iteration counts,
 replication counts and years are scientific configuration identifiers and were

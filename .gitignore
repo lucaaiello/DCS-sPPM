@@ -1,17 +1,6 @@
 # Local scientific inputs, numerical results and manuscript projects
 /Data/*
 !/Data/README.md
-!/Data/preparation/
-/Data/preparation/**
-!/Data/preparation/*.R
-!/Data/preparation/*.ipynb
-!/Data/preparation/README.md
-!/Data/preparation/scripts/
-!/Data/preparation/scripts/*.R
-!/Data/preparation/manifests/
-!/Data/preparation/manifests/*.csv
-!/Data/preparation/manifests/*.R
-!/Data/preparation/manifests/*.md
 **/results/
 /Luc_i_a/
 /Luc_i_a_JRSSC/
