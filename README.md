@@ -53,6 +53,11 @@ The audit reads paths and file metadata only. It does not fit models, recompute 
 
 ## GitHub and data release
 
+Manuscript input release: [v1.0.0](https://github.com/lucaaiello/DCS-sPPM/releases/tag/v1.0.0).
+Download the three RDS assets together with INPUTS_README.md and SHA256SUMS,
+then follow Data/README.md. Access to a private release requires repository
+read permission; citing its URL does not itself grant reviewer access.
+
 Analysis, simulation and plotting code, shared helpers, validation tools and useful documentation are versioned. All data arrays, results, graphics, caches and both LaTeX projects remain ignored. The three required input files are released separately from Git history through this repository's Releases page. They reproduce the final cohort, imputation, weather matching, scaling and prediction grid without needing unavailable original downloads or historical fits. Saved fitted results are needed only to regenerate figures without refitting. Manuscript projects are local author-only resources.
 
 Raw preparation notebooks/scripts and station-selection utilities have been archived locally rather than deleted. Their provenance remains relevant to the manuscript, but the public reproduction route starts from frozen prepared inputs. This does not exempt the authors from accurately documenting the original filtering and aggregation rules. There is no independently verified fresh-download-to-analysis claim, and no release has been uploaded by these scripts.

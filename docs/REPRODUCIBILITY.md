@@ -8,7 +8,7 @@ these examples deliberately identify the final result names.
 ## 1. Read-only audit
 
 For a fresh clone, first download the three frozen input assets and SHA256SUMS
-from the matching release of this repository. Follow [input installation](../Data/README.md)
+from [release v1.0.0](https://github.com/lucaaiello/DCS-sPPM/releases/tag/v1.0.0). Follow [input installation](../Data/README.md)
 and verify checksums before refitting. The release link must identify the input
 version matching the code, not a moving latest download. Raw preprocessing is
 not part of this reproduction route. Historical diagnostic inputs are optional.

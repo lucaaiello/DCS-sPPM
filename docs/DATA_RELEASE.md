@@ -1,5 +1,11 @@
 # Frozen-input release workflow
 
+Manuscript release supplied by the author:
+[v1.0.0](https://github.com/lucaaiello/DCS-sPPM/releases/tag/v1.0.0).
+Use this versioned page for the three RDS files, input README and checksums.
+Confirm all five assets are visible to an authorised reader before submission;
+the recorded link alone is not an independent upload/access verification.
+
 ## Scope
 
 This repository reproduces reported analyses from the exact prepared inputs

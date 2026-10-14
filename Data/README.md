@@ -2,8 +2,9 @@
 
 The public reproduction workflow starts from the exact prepared inputs used
 in the manuscript, not fresh raw downloads. Download the three RDS assets and
-SHA256SUMS from the matching release of this same DCS-sPPM repository. The
-release has not been uploaded by these tools. See [release instructions](../docs/DATA_RELEASE.md).
+SHA256SUMS from [release v1.0.0](https://github.com/lucaaiello/DCS-sPPM/releases/tag/v1.0.0)
+of this same repository. Retain INPUTS_README.md alongside the checksums.
+Private releases require repository read access. See [release instructions](../docs/DATA_RELEASE.md).
 
 ## Required assets
 
